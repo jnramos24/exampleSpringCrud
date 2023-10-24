@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,14 +15,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Client {
-	
+public class Sale {
+ 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer clientId;
+	private Integer saleCode;
+	private String saleDate;
+	private Double saleTotal;
 	
-	private String name;
-	private String surname;
-	private String dni;
-	
+	@ManyToOne
+	@JoinColumn(name="client_code")
+	private Client saleClient;
 }

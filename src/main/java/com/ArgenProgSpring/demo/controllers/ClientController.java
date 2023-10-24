@@ -24,17 +24,6 @@ public class ClientController {
 	@Autowired
 	private ClientServiceImpl clientService;
 
-	@GetMapping("")
-	public ResponseEntity<List<Client>> getAllClients() {
-		List<Client> allClient = clientService.getAllClients();
-
-		if (!allClient.isEmpty()) {
-			return new ResponseEntity<>(allClient, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}
-	}
-
 	@PostMapping("/create")
 	public ResponseEntity<String> createClient(@RequestBody Client client) {
 
@@ -46,11 +35,21 @@ public class ClientController {
 			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
 	}
 
-	@GetMapping("/{client_id}")
-	public ResponseEntity<Client> getclientById(@PathVariable Integer client_id) {
+	@GetMapping("")
+	public ResponseEntity<List<Client>> getAllClients() {
+		List<Client> allClients = clientService.getAllClients();
+
+		if (!allClients.isEmpty()) {
+			return new ResponseEntity<>(allClients, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
+	@GetMapping("/{clientId}")
+	public ResponseEntity<Client> getclientById(@PathVariable("ClientId") Integer client_id) {
 		Client client = clientService.getClientById(client_id);
 
 		if (client != null) {
