@@ -14,13 +14,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Client {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer clientId;
-	
+
 	private String name;
 	private String surname;
 	private String dni;
-	
+
+	public Client(String name, String surname, String dni) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.dni = dni;
+	}
+
 }
